@@ -1,8 +1,8 @@
 # Create skill extractor
 
-import pandas as pd                                     # Pandas to resad structured data
+import pandas as pd                                     # Pandas to read structured data
 
-def load_skills(skill_file = "data/skills.csv"):        # function to load skill from file path
+def load_skills(skill_file = "C:/Smart_ATS/data/skills.csv"):        # function to load skill from file path
     skills = pd.read_csv(skill_file, header= None)      # read file from path, header->none, CSV has no column
     return [s.lower() for s in skills[0].tolist()]      # select first column and convert to python list of skills
 
