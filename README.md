@@ -50,8 +50,8 @@ Smart_ATS/
 How to Run
 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/smart-ats.git
-cd smart-ats
+git clone https://github.com/sbbala07/Smart_ATS.git
+cd Smart_ATS
 ```
 2. Create a virtual environment and install dependencies
 ```bash
@@ -84,7 +84,19 @@ Skill Match — exact keyword matching between resume and JD against a skills.cs
 Semantic Score — cosine similarity between sentence-transformer embeddings of the full resume and JD text
 ---
 Screenshots
-(Add your screenshots here)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2fe2ec62-7e68-4220-992a-a358a0fe8298" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/9edf4ad4-5c22-419c-9fb9-2078c6465b5c" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/277e892f-08fc-4d86-8f18-ccb9876caec8" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/e27726f8-5a7a-4b4d-ab01-1e52b2e6fc19" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b11b821c-c717-41bc-a15b-5b6b4cd3dcc0" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/f1053d95-4225-44eb-b2f4-c4ce49f49377" />
+
+
 ---
 What I Learned
 How to build a multi-stage NLP pipeline from scratch
@@ -105,4 +117,5 @@ Try a larger LLM for better evaluation quality
 Add multi-JD support for batch hiring workflows
 ---
 Author
-Built by Bala as a portfolio project while learning AI/ML engineering.
+
+Built by Balachandran as a portfolio project while learning AI/ML engineering.
