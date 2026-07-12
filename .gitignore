@@ -1,0 +1,16 @@
+# Virtual environment
+venv/
+
+# Data files - don't upload candidate PDFs
+version_1/data/resumes/*.pdf
+version_1/data/job_descriptions/*.pdf
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+
+# Environment variables
+.env
