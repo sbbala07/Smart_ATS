@@ -119,19 +119,19 @@ Confidence  = (Skill Match % + Semantic Score) / 2
 ## Screenshots
 
 ### Upload Screen
-(<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/63e51904-c7c7-45da-b5ef-915f75dc7efd" />
-)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/63e51904-c7c7-45da-b5ef-915f75dc7efd" />
+
 
 ### Rankings Tab
-(<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/0ba3981c-8d8a-447e-841e-dda4fcd852b5" />
-)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/0ba3981c-8d8a-447e-841e-dda4fcd852b5" />
+
 
 ### Charts Tab
-(<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/002b38c8-1f48-4f2b-8e43-69b029af49ad" />
-)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/002b38c8-1f48-4f2b-8e43-69b029af49ad" />
+
 
 ### AI Evaluation Tab
-(<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/1b06b401-92be-424a-9850-e35877f27be3" />)
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/1b06b401-92be-424a-9850-e35877f27be3" />
 
 ---
 
