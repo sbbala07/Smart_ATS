@@ -7,9 +7,11 @@ from src.scoring import compute_skill_match                   # compute skill ma
 from src.scoring import compute_semantic_similarity
 from src.llm_reasoning import generate_evaluation, generate_improvement_suggestions
 import os                                             # interact with file system to list files, build paths
+from pathlib import Path
 
-RESUME_DIR = "C:/Smart_ATS/data/resumes"                           # Folder path of resumes
-JD_DIR = "C:/Smart_ATS/data/job_descriptions"                      # Folder path of JD's
+BASE_DIR = Path(__file__).resolve().parent # folder where the file is located
+RESUME_DIR = BASE_DIR/"data"/"resumes"                           # Folder path of resumes
+JD_DIR = BASE_DIR/"data"/"job_descriptions"                      # Folder path of JD's
 
 def load_documents(directory):                        # Function to takes folder path and returns clean text form
 
@@ -48,18 +50,25 @@ if __name__ == "__main__":                            # Ensures this code runs o
         )                                                           # Hybrid scoring 60% skill match, 40% semantic similarity
 
         
-        confidence_score = round(
-            100 - abs(match_result["match_percent"] - semantic_score),
-            2
-        )                                                           # Calculate confidence score based on result
+        confidence_score = round((match_result["match_percent"] + semantic_score)/2, 2)  # Average of both scores as confidence                                                         # Calculate confidence score based on result
 
+        if final_score >= 70:
+            fit_category = "Strong Fit"
+        elif final_score >= 40:
+            fit_category = "Moderate Fit"
+        else:
+            fit_category = "Weak Fit"   
+
+        
         results.append({                                            # Store structured result per candidate
             "filename":filename,
             "match_percent": match_result["match_percent"],
             "semantic_score": semantic_score,
             "final_score": final_score,
             "confidence_score": confidence_score,
-            "match_result": match_result
+            "fit_category" : fit_category,
+            "match_result": match_result,
+            "resume_text": resume_text
             
         })
 
@@ -70,11 +79,12 @@ if __name__ == "__main__":                            # Ensures this code runs o
     print("\n====== RANKED CANDIDATES ======")
 
     for rank, candidate in enumerate(ranked_results,1):    # loops through sorted list and assign rank starting from 1
-        print(f" Rank {rank} : {candidate["filename"]}")
-        print(f" Skill Match % : {candidate["match_percent"]}")
-        print(f" Semantic Score : {candidate["semantic_score"]}")
-        print(f" Final Score : {candidate["final_score"]}")
+        print(f" Rank {rank} : {candidate['filename']}")
+        print(f" Skill Match % : {candidate['match_percent']}")
+        print(f" Semantic Score : {candidate['semantic_score']}")
+        print(f" Final Score : {candidate['final_score']}")
         print(f" Confidence Score: {candidate['confidence_score']}")
+        print(f" Fit Category   : {candidate['fit_category']}")
         print("-" * 40)
 
     print("\n====== CANDIDATE SKILL COMPARISON ======")
@@ -88,35 +98,24 @@ if __name__ == "__main__":                            # Ensures this code runs o
         print("Matched Skills:", " | ".join(matched))
         print("Missing Skills:", " | ".join(missing))
 
-top_candidate = ranked_results[0]
 
-if top_candidate["final_score"] >= 70:
-    fit_category = "Strong Fit"
-elif top_candidate["final_score"] >= 40:
-    fit_category = "Moderate Fit"
-else:
-    fit_category = "Weak Fit"   
 
-print(f" Fit Category : {fit_category}")
+    top_candidate = ranked_results[0]
 
-resume_text = resumes[top_candidate["filename"]]
-resume_skills = extract_skills(resume_text, skills)
-jd_skills = extract_skills(list(jd.values())[0], skills)
+    match_result = top_candidate["match_result"]
 
-match_result = compute_skill_match(resume_skills, jd_skills)
+    evaluation = generate_evaluation(
+        top_candidate["filename"],
+        match_result,
+        top_candidate["semantic_score"],
+        top_candidate["final_score"],
+        top_candidate["fit_category"]
+    )
 
-evaluation = generate_evaluation(
-    top_candidate["filename"],
-    match_result,
-    top_candidate["semantic_score"],
-    top_candidate["final_score"],
-    fit_category
-)
+    improvements = generate_improvement_suggestions(match_result)
 
-improvements = generate_improvement_suggestions(match_result)
+    print("\n======== AI EVALUATION ========\n")
+    print(evaluation)
 
-print("\n======== AI EVALUATION ========\n")
-print(evaluation)
-
-print("\n======== RESUME IMPROVEMENT SUGGESTIONS ========\n")
-print(improvements)
+    print("\n======== RESUME IMPROVEMENT SUGGESTIONS ========\n")
+    print(improvements)
